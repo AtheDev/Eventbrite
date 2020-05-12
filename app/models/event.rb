@@ -17,13 +17,13 @@ class Event < ApplicationRecord
   has_many :users, through: :attendances
 
   def start_date_cannot_be_in_the_past
-    if start_date < Date.today
+    if start_date.present? && start_date < Date.today
       errors.add(:start_date, "Date  invalide")
     end
   end
 
   def duration_multiple_5
-    if duration / 5 != 0
+    if duration % 5 != 0
       errors.add(:duration, "Durée non valide, 5 min par 5 min")
     end
   end
