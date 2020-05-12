@@ -3,19 +3,20 @@
   <head>
     <title></title>
     <style type="text/css">
-
-
+      .card-img {
+        object-fit: cover;
+        height: 337px;
+      }
     </style>
   </head>
 
   <body>
     <div class="container mt-5">
-      <div class="card bg-dark text-white">
-        <img src="https://app-evenbrite.herokuapp.com/assets/img_event.jpg" class="card-img" alt="...">
-          <div class="card-img-overlay">
-            <h1 class="card-title"><%= @event.title %></h1>
-          </div>
+
+      <div class="card bg-dark text-dark">
+        <img src="https://www.kravmaga-beynes.fr/wp-content/uploads/2016/09/EVENTS1.jpg" class="card-img" alt="...">
         </div>
+        <h1 class="card-title"><%= @event.title %></h1>
         <div class="mt-5">
           <p>Date: <%= @event.start_date %></p>
           <p>Durée: <%= @event.duration %> minutes</p>
