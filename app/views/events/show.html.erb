@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <style type="text/css">
+
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <div class="card bg-dark text-white">
+        <img src="http://localhost:3000/assets/img_event.jpg" class="card-img" alt="...">
+          <div class="card-img-overlay">
+            <h1 class="card-title"><%= @event.title %></h1>
+          </div>
+        </div>
+        <div class="mt-5">
+          <p>Date: <%= @event.start_date %></p>
+          <p>Durée: <%= @event.duration %> minutes</p>
+          <p>Ce qui vous attend: <%= @event.description %></p>
+          <p>Où: <%= @event.location %></p>
+          <p>Prix: <%= @event.price %>€</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

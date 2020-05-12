@@ -1,2 +1,45 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    a.customc,
+    a.customc:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+    .custom-card:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, .2)
+  }
+
+  </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+      <div class="d-flex justify-content-center align-items-center">
+        <h2 class="text-black">BIENVENUE!</h2>
+      </div>
+    </div>
+
+<div class="container mt-5">
+  <div class="row row-cols-1 row-cols-md-4">
+    <% @event.order([:id]).each do |event| %>
+        <% @id = Event.where(title: "#{event.title}").ids %>
+        <a href="<%= event_path(@id) %>" class="customc">
+          <div class="col mb-4">
+            <div class="card h-100 custom-card">
+              <img src="http://localhost:3000/assets/img_event.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><%= event.title %></h5>
+                <p class="card-text"><%= event.description %></p>
+              </div>
+            </div>
+          </div>
+        </a>
+    <% end %>
+  </div>
+</div>
+
+</body>
+</html>
