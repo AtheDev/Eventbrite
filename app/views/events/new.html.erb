@@ -17,27 +17,28 @@
             <br />
           <div class="form-group">
             <%= label_tag 'Localisation' %>
-            <%= text_area_tag 'location', @event.location, {class: 'form-control'} %>
+            <%= text_field_tag 'location', @event.location, {class: 'form-control'} %>
           </div>
             <br />
           <div class="form-group">
             <%= label_tag 'Prix' %>
-            <%= text_area_tag 'price', @event.price, {class: 'form-control'} %>
+            <%= text_field_tag 'price', @event.price, {class: 'form-control'} %>
           </div>
             <br />
           <div class="form-group">
             <%= label_tag 'Date' %>
-            <%= text_area_tag 'start_date', @event.start_date, {class: 'form-control'} %>
+            <%= text_field_tag 'start_date', @event.start_date, {class: 'form-control'} %>
           </div>
             <br />
           <div class="form-group">
             <%= label_tag 'Durée' %>
-            <%= text_area_tag 'duration', @event.duration, {class: 'form-control'} %>
+            <%= text_field_tag 'duration', @event.duration, {class: 'form-control'} %>
           </div>
             <br />
           <div class="actions mt-5">
             <%= submit_tag "Create Event", {class:'btn btn-primary'} %>
           </div>
+            <br />
           <% end %>
         </div>
       </div>

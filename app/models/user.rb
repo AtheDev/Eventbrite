@@ -9,10 +9,8 @@ class User < ApplicationRecord
     presence: true,
     uniqueness: true,
     format: {with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "email adress please"}
-  #validates :first_name, presence: true
-  #validates :last_name, presence: true
-  #has_secure_password
-  #validates :password, presence: true, length: { minimum: 6}
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
 
   has_many :admin_events, foreign_key: 'admin_id', class_name: "Event"
@@ -26,4 +24,5 @@ class User < ApplicationRecord
   def recoverable
     UserMailer.reset_password_instruction(self).deliver_now
   end
+
 end

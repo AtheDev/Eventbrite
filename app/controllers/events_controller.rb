@@ -13,18 +13,15 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new( 'admin_id' => session[:user_id],
+    @event = Event.new( 'admin_id' => params[:current_user.id],
                         'title' => params[:title],
                         'description' => params[:description],
                         'location' => params[:location],
                         'price' => params[:price],
                         'start_date' => params[:start_date],
                         'duration' => params[:duration])
-    # if @event.save
-    #   @event = Event.all
-    #   flash[:success] = ""
-    #   render :show
-    # end
+    @event.save
+    redirect_to root_path
   end
 
 end
