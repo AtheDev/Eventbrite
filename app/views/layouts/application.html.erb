@@ -30,18 +30,18 @@
       </div>
 
       <div class="dropdown">
-        <% #if(current_user == nil) %>
+        <% if(current_user == nil) %>
           <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Se connecter</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="<%#= new_user_path %>">S'inscrire</a>
-              <a class="dropdown-item" href="<%#= new_session_path %>">Se connecter</a>
+              <a class="dropdown-item" href="<%= new_user_registration_path %>">S'inscrire</a>
+              <a class="dropdown-item" href="<%= new_user_session_path %>">Se connecter</a>
             </div>
-        <% #else %>
+        <% else %>
           <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Se deconnecter</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="<%#= session_path(session.id) %>" data-method="DELETE">Se deconnecter</a>
+              <a class="dropdown-item" href="<%= destroy_user_session_path %>" data-method="DELETE">Se deconnecter</a>
             </div>
-        <% #end %>
+        <% end %>
         </div>
       </div>
 
