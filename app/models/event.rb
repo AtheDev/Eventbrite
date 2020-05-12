@@ -26,4 +26,5 @@ class Event < ApplicationRecord
     if duration / 5 != 0
       errors.add(:duration, "Durée non valide, 5 min par 5 min")
     end
+  end
 end
