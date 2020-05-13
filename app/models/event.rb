@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
 
-  validate :start_date_cannot_be_in_the_past
-  validate :duration_multiple_5
+  validate :start_date_not_in_the_past
+  validate :duration_multiple
   validates :title, presence: true,
     length: { in: 5..140}
   validates :description, presence: true,
@@ -14,15 +14,14 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :users, through: :attendances
 
-  def start_date_cannot_be_in_the_past
-    if start_date.present? && start_date < Date.today
-      errors.add(:start_date, "Date  invalide")
-    end
-  end
 
-  def duration_multiple_5
-    if duration.present? && duration % 5 != 0 && duration <= 0 && duration.class != Integer
-      errors.add(:duration, "Durée non valide, 5 min par 5 min")
+  private
+
+    def start_date_not_in_the_past
+      errors.add(:start_date, "The event can't be in the past.") if start_date < Time.now
     end
-  end
+
+    def duration_multiple
+      errors.add(:duration, "Choose a duration which is multiple of 5.") unless duration % 5 == 0
+    end
 end
