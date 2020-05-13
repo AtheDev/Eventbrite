@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new( 'admin_id' => params[:current_user.id],
+    @event = Event.new( 'admin_id' => current_user.id,
                         'title' => params[:title],
                         'description' => params[:description],
                         'location' => params[:location],
