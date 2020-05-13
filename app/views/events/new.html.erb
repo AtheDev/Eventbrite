@@ -8,31 +8,31 @@
           <h1 class="h3 mb-3 font-weight-normal text-center">New Event</h1>
           <div class="form-group">
             <%= label_tag 'Titre' %>
-            <%= text_field_tag 'title', @event.title, {class: 'form-control'} %>
+            <%= text_field_tag 'title', nil, {class: 'form-control'} %>
           </div>
           <div class="form-group">
             <%= label_tag 'Description' %>
-            <%= text_area_tag 'description', @event.description, {class: 'form-control'} %>
+            <%= text_area_tag 'description', nil, {class: 'form-control'} %>
           </div>
             <br />
           <div class="form-group">
             <%= label_tag 'Localisation' %>
-            <%= text_field_tag 'location', @event.location, {class: 'form-control'} %>
+            <%= text_field_tag 'location', nil, {class: 'form-control'} %>
           </div>
             <br />
           <div class="form-group">
             <%= label_tag 'Prix' %>
-            <%= text_field_tag 'price', @event.price, {class: 'form-control'} %>
+            <%= number_field_tag 'price', nil, {class: 'form-control'} %>
           </div>
             <br />
           <div class="form-group">
             <%= label_tag 'Date' %>
-            <%= text_field_tag 'start_date', @event.start_date, {class: 'form-control'} %>
+            <%= date_field_tag 'start_date', nil, {class: 'form-control'} %>
           </div>
             <br />
           <div class="form-group">
             <%= label_tag 'Durée' %>
-            <%= text_field_tag 'duration', @event.duration, {class: 'form-control'} %>
+            <%= number_field_tag 'duration', nil, {class: 'form-control', step: 5} %>
           </div>
             <br />
           <div class="actions mt-5">
