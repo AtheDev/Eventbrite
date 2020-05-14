@@ -11,20 +11,57 @@
   </head>
 
   <body>
-    <div class="container mt-5">
 
-      <div class="card bg-dark text-dark">
-        <img src="https://www.kravmaga-beynes.fr/wp-content/uploads/2016/09/EVENTS1.jpg" class="card-img" alt="...">
-        </div>
-        <h1 class="card-title"><%= @event.title %></h1>
-        <div class="mt-5">
-          <p>Date: <%= @event.start_date %></p>
-          <p>Durée: <%= @event.duration %> minutes</p>
-          <p>Ce qui vous attend: <%= @event.description %></p>
-          <p>Où: <%= @event.location %></p>
-          <p>Prix: <%= @event.price %>€</p>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <% [:success].each do |key| %>
+            <% if flash[:success] %>
+              <div class="alert alert-info">
+                <div class="<%= key %>" id="flash">
+                  Evènement créé!
+                  <%= flash[:success] %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
+    </div>
+
+    <div class="container mt-5">
+
+        <div class="card bg-dark text-dark">
+          <img src="https://www.kravmaga-beynes.fr/wp-content/uploads/2016/09/EVENTS1.jpg" class="card-img" alt="...">
+          </div>
+          <h1 class="card-title"><%= @event.title %></h1>
+            <div class="row">
+              <div class="col col-6">
+                <div class="mt-5">
+                  <p>Date de début: <%= @event.start_date %></p>
+                  <p>Date de fin: <%= @event.end_date %></p>
+                  <p>Créé par: <%= @event.admin.last_name %> <%= @event.admin.first_name %></p>
+                  <p>Contacter à l'adresse suivante: <%= @event.admin.email %></p>
+                  <p>Durée: <%= @event.duration %> minutes</p>
+                  <p>Ce qui vous attend: <%= @event.description %></p>
+                  <p>Où: <%= @event.location %></p>
+                  <p>Prix: <%= @event.price %>€</p>
+                  <p>Participants: <%= @event.users.count %></p>
+                </div>
+              </div>
+              <div class="col col-6">
+                <div class="mt-5">
+                  <% if user_signed_in? && Attendance.where(event: @event,user: current_user).empty? && current_user != @event.admin %>
+                    <a class="btn btn-outline-dark" href="<%= new_event_attendance_path(@event.id) %>" role="button" style="">Participer à l'évènement</a>
+                  <% end %>
+                  <% if  !Attendance.where(event: @event,user: current_user).empty? %>
+                    <a class="btn btn-outline-dark" href="#" role="button" style="">Tu participes déjà!</a>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+        </div>
+
     </div>
   </body>
 </html>

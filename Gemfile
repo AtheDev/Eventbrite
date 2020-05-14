@@ -6,6 +6,7 @@ gem 'table_print'
 gem 'faker'
 gem 'dotenv-rails'
 gem 'devise'
+gem 'stripe'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
 # Use postgresql as the database for Active Record
