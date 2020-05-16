@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-
+  has_one_attached :avatar
   has_many :admin_events, foreign_key: 'admin_id', class_name: "Event"
   has_many :attendances
   has_many :events, through: :attendances

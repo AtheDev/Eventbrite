@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <br><br><br>
+ <%= form_for @event, html: { method: :put, class: "form-signin mt-3" } do |f| %>
+        <h1 class="h3 mb-3 font-weight-normal text-center">Edit Event</h1>
+
+          <div class="form-group">
+            <%= f.label :title, "Titre" %><br />
+            <%= f.text_field :title, autofocus: true, autocomplete: "title", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :description, "Description" %><br />
+            <%= f.text_field :description, autofocus: true, autocomplete: "description", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :location, "Localisation" %><br />
+            <%= f.text_field :location, autofocus: true, autocomplete: "location", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :start_date, "Date" %><br />
+            <%= f.date_field :start_date, autofocus: true, autocomplete: "start_date", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :price, "Prix" %><br />
+            <%= f.number_field :price, autofocus: true, autocomplete: "price", class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :duration, "Durée" %><br />
+            <%= f.number_field :duration, autofocus: true, autocomplete: "duration", class: "form-control" %>
+          </div>
+
+          <div class="actions mt-5">
+            <%= f.submit "Update", class: "btn btn-lg btn-primary btn-block" %>
+          </div>
+          <div class="actions mt-2">
+            <a href="<%= event_path %>" class="btn btn-lg btn-danger btn-block" data-method="DELETE">Delete</a>
+          </div>
+      <% end %>
+
+      <div class="actions mt-2">
+
+      </div>
+
+      <%= link_to "Back", :back %>
+
+    <br><br><br>
+    </div>
+  </div>
+</div>
+

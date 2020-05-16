@@ -19,39 +19,46 @@
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <br><br><br>
-          <%= form_tag url_for(action: 'create'), method: "post" do %>
+          <%= form_with model: @event, local: true do |form| %>
           <h1 class="h3 mb-3 font-weight-normal text-center">New Event</h1>
           <div class="form-group">
-            <%= label_tag 'Titre' %>
-            <%= text_field_tag 'title', nil, {class: 'form-control'} %>
+            <%= form.label :title, 'Titre' %>
+            <%= form.text_field :title, class: 'form-control', required: true %>
           </div>
           <div class="form-group">
-            <%= label_tag 'Description' %>
-            <%= text_area_tag 'description', nil, {class: 'form-control'} %>
+            <%= form.label :description, 'Description' %>
+            <%= form.text_area :description, class: 'form-control', required: true %>
           </div>
             <br />
           <div class="form-group">
-            <%= label_tag 'Localisation' %>
-            <%= text_field_tag 'location', nil, {class: 'form-control'} %>
+            <%= form.label :location, 'Localisation' %>
+            <%= form.text_field :location, class: 'form-control', required: true %>
           </div>
             <br />
           <div class="form-group">
-            <%= label_tag 'Prix' %>
-            <%= number_field_tag 'price', nil, {class: 'form-control'} %>
+            <%= form.label :price, 'Prix' %>
+            <%= form.number_field :price, class: 'form-control',required: true, placeholder: '€' %>
           </div>
             <br />
           <div class="form-group">
-            <%= label_tag 'Date' %>
-            <%= date_field_tag 'start_date', nil, {class: 'form-control'} %>
+            <%= form.label :start_date, 'Date' %>
+            <%= form.date_field :start_date, class: 'form-control' %>
           </div>
             <br />
           <div class="form-group">
-            <%= label_tag 'Durée' %>
-            <%= number_field_tag 'duration', nil, {class: 'form-control', step: 5} %>
+            <%= form.label :duration, 'Durée' %>
+            <%= form.number_field :duration, class: 'form-control',placeholder: 'min', step: 5 %>
           </div>
             <br />
+
+          <div class="form-group">
+            <p>Charger ta photo de l'évènement</p>
+              <%= form.file_field :picture %><br>
+          </div>
+            <br />
+
           <div class="actions mt-5">
-            <%= submit_tag "Create Event", {class:'btn btn-primary'} %>
+            <%= form.submit "Create Event", {class:'btn btn-primary'} %>
           </div>
             <br />
           <% end %>

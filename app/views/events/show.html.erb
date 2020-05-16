@@ -5,7 +5,7 @@
     <style type="text/css">
       .card-img {
         object-fit: cover;
-        height: 337px;
+        height: 500px;
       }
     </style>
   </head>
@@ -32,8 +32,13 @@
     <div class="container mt-5">
 
         <div class="card bg-dark text-dark">
-          <img src="https://www.kravmaga-beynes.fr/wp-content/uploads/2016/09/EVENTS1.jpg" class="card-img" alt="...">
-          </div>
+          <% if @event.picture.attached? %>
+            <%= image_tag @event.picture, alt: 'picture', class: "card-img" %>
+          <% else %>
+            <%= image_tag asset_path('img_event.jpg'), alt: 'picture', class: "card-img" %>
+          <% end %>
+        </div>
+
           <h1 class="card-title"><%= @event.title %></h1>
             <div class="row">
               <div class="col col-6">
@@ -45,17 +50,27 @@
                   <p>Durée: <%= @event.duration %> minutes</p>
                   <p>Ce qui vous attend: <%= @event.description %></p>
                   <p>Où: <%= @event.location %></p>
+                  <% if @event.is_free %>
+                  <p>Prix: Gratuit</p>
+                  <% else %>
                   <p>Prix: <%= @event.price %>€</p>
+                  <% end %>
                   <p>Participants: <%= @event.users.count %></p>
                 </div>
               </div>
               <div class="col col-6">
                 <div class="mt-5">
-                  <% if user_signed_in? && Attendance.where(event: @event,user: current_user).empty? && current_user != @event.admin %>
+                  <% if user_signed_in? && Attendance.where(event: @event,user: current_user).empty? && current_user != @event.admin && !@event.is_free %>
                     <a class="btn btn-outline-dark" href="<%= new_event_attendance_path(@event.id) %>" role="button" style="">Participer à l'évènement</a>
+                  <% end %>
+                  <% if user_signed_in? && Attendance.where(event: @event,user: current_user).empty? && current_user != @event.admin && @event.is_free %>
+                  <%= button_to "Participer à l'événement", event_attendances_path(params[:id]), method: :create, class: "btn btn-outline-dark" %>
                   <% end %>
                   <% if  !Attendance.where(event: @event,user: current_user).empty? %>
                     <a class="btn btn-outline-dark" href="#" role="button" style="">Tu participes déjà!</a>
+                  <% end %>
+                  <% if  current_user == @event.admin %>
+                    <a class="btn btn-outline-dark" href="<%= event_attendances_path(@event.id) %>" role="button" style="">Mon espace évènement!</a>
                   <% end %>
                 </div>
               </div>

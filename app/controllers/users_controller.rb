@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def show
     @events = Event.where(admin: current_user)
     @email = current_user.email
+    @user = current_user
   end
 
   private

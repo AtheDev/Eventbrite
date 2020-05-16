@@ -11,10 +11,11 @@ class Event < ApplicationRecord
     length: { in: 20..1000}
 
   validates :price, presence: true,
-    numericality: {only_integer: true, greater_than: 0, less_than_or_equal_to: 1000}
+    numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 1000}
 
   validates :location, presence: true
 
+  has_one_attached :picture
   belongs_to :admin, class_name: "User"
   has_many :attendances
   has_many :users, through: :attendances
@@ -34,6 +35,10 @@ class Event < ApplicationRecord
 
   def end_date
     self.start_date + duration.minutes
+  end
+
+  def is_free
+    price == 0
   end
 
 end

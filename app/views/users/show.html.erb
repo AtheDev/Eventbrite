@@ -11,26 +11,52 @@
       .custom-card:hover {
         box-shadow: 0 0 11px rgba(33, 33, 33, .2)
       }
+      .input-file{
+        display: none;
+      }
+      .card-img-top {
+        object-fit: cover; height: 130px;
+      }
     </style>
   </head>
 
   <body>
     <h1 class="h1 mt-5 font-weight-normal text-center">Hello <%= current_user.first_name %> !</h1>
-
-    <h2 class="h2 mt-5 mb-5 font-weight-normal container">Informations personnelles :</h2>
     <div class="container">
-      <ul>
-        <li>Nom: <%= current_user.last_name %></li>
-        <li>Prénom: <%= current_user.first_name %></li>
-        <li>Description: <%= current_user.description %></li>
-        <li>Email: <%= current_user.email %></li>
-      </ul>
-      <a href="<%= edit_user_registration_path %>" role="button" class="btn btn-danger btn-sm">Editer mon profil</a>
+      <div class="row">
+        <div class="col-6">
+          <h2 class="h2 mt-5 mb-5 font-weight-normal container">Avatar actuel :</h2>
+          <div class="container">
+            <%if @user.avatar.attached?%>
+              <%= image_tag @user.avatar, alt: 'avatar', size: '200' %>
+            <%else%>
+              <p>=== Il n'y a pas encore d'avatar lié à cet utilisateur ===</p>
+            <%end%>
+            <%= form_tag user_avatars_path(@user), multipart: true do %>
+            <label for="avatar" class="btn btn-danger btn-sm">Charger ta photo de profil</label>
+              <%= file_field_tag :avatar, class: "input-file" %><br>
+              <%= submit_tag "Enregistrer ta photo", class: "btn btn-danger btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <h2 class="h2 mt-5 mb-5 font-weight-normal container">Informations personnelles :</h2>
+          <div class="container">
+            <ul>
+              <li>Nom: <%= current_user.last_name %></li>
+              <li>Prénom: <%= current_user.first_name %></li>
+              <li>Description: <%= current_user.description %></li>
+              <li>Email: <%= current_user.email %></li>
+            </ul>
+            <a href="<%= edit_user_registration_path %>" role="button" class="btn btn-danger btn-sm">Editer mon profil</a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <h2 class="h2 mt-5 font-weight-normal container">Tes évènements :</h2>
-
     <div class="container">
+      <h2 class="h2 mt-5 font-weight-normal container">Tes évènements :</h2>
       <div class="row">
         <div class="container mt-5">
           <div class="row row-cols-1 row-cols-md-4">
@@ -39,7 +65,11 @@
               <a href="<%= event_path(@id) %>" class="customc">
                 <div class="col mb-4">
                   <div class="card h-100 custom-card">
-                    <img src="https://www.kravmaga-beynes.fr/wp-content/uploads/2016/09/EVENTS1.jpg" class="card-img-top" alt="...">
+                    <% if event.picture.attached? %>
+                      <%= image_tag event.picture, alt: 'picture', class: "card-img-top" %>
+                    <% else %>
+                      <%= image_tag asset_path('img_event.jpg'), alt: 'picture', class: "card-img-top" %>
+                    <% end %>
                     <div class="card-body">
                       <h2><%= event.title %></h2>
                       <p><%= event.description %></p>
